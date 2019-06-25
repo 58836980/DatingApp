@@ -8,7 +8,7 @@ import { User } from '../_models/user';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = environment.apiUser;
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -22,5 +22,13 @@ export class UserService {
 
   updateUser(id: number, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id, user);
+  }
+
+  setMainPhoto(userId: number, id: number) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/photos/' + id + '/setMain', {});
+  }
+
+  deletePhoto(userId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/photos/' + id);
   }
 }

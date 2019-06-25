@@ -40,6 +40,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPut("{id}")]
+
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -49,7 +50,7 @@ namespace DatingApp.API.Controllers
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await _repo.SaveAllAsync())
+            if (await _repo.SaveAll())
                 return NoContent();
 
             throw new Exception($"Updating User {id} failed on save");
